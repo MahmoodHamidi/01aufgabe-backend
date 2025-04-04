@@ -26,6 +26,9 @@ button {
   background-color: hsl(125, 47%, 44%);
 }
 .delete-button {
+  display: flex;
+  align-items: center;
+
   background-color: hsl(10, 90%, 50%);
 }
 .delete-button:hover {

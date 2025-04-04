@@ -15,7 +15,7 @@ const KeyLogger = () => {
         code: event.code,
         which: event.which,
       });
-      //   console.log(event.key);
+      console.log(event);
     };
     window.addEventListener("keydown", handleKeyDown);
 
