@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaArrowCircleUp, FaArrowCircleDown } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
+import "./ToduList.css";
 
 const TodoList = () => {
   // مقدار اولیه از localStorage خوانده می‌شود
