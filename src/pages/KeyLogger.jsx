@@ -25,8 +25,8 @@ const KeyLogger = () => {
   }, []);
 
   return (
-    <div className="h-screen flex justify-center items-center">
-      <div className=" text-center w-300 h-100  ">
+    <div className="h-screen flex justify-center items-center background">
+      <div className=" text-center w-300 h-100 backdrop-blur bg-white/30 rounded-lg shadow-lg">
         <p className=" m-6 text-2xl font-mono font-bold">
           The key you pressed: {keyInfo.key}
         </p>
