@@ -4,7 +4,6 @@ import { MdDeleteForever } from "react-icons/md";
 import "./ToduList.css";
 
 const TodoList = () => {
-  // مقدار اولیه از localStorage خوانده می‌شود
   const [tasks, setTasks] = useState(() => {
     const savedTasks = JSON.parse(localStorage.getItem("tasks"));
     return savedTasks || [];
@@ -12,7 +11,6 @@ const TodoList = () => {
 
   const [newTask, setNewTask] = useState("");
 
-  // ذخیره‌ی تغییرات در localStorage
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
@@ -62,7 +60,7 @@ const TodoList = () => {
   }
 
   return (
-    <div className="to-do-list">
+    <div className="to-do-list background">
       <h1>To-Do List</h1>
       <div>
         <input
@@ -80,8 +78,6 @@ const TodoList = () => {
         {tasks.map((task, index) => (
           <li key={index}>
             <span className="text">{task}</span>
-            {console.log(task)}
-
             <button className="delete-button" onClick={() => deleteTask(index)}>
               Delete <MdDeleteForever />
             </button>
