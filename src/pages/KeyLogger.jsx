@@ -9,6 +9,7 @@ const KeyLogger = () => {
     which: "",
   });
   const [showModal, setShowModal] = useState(true);
+  const [inputValue, setInputValue] = useState("");
   const inputRef = useRef(null);
 
   useEffect(() => {
@@ -17,49 +18,54 @@ const KeyLogger = () => {
     }
   }, [showModal]);
 
-  useEffect(() => {
-    const handleKeyDown = (event) => {
+  // فقط وقتی مودال باز است، کیبورد را با input کنترل کن
+  function handleInput(e) {
+    const value = e.target.value;
+    setInputValue(value);
+    if (value.length > 0) {
+      const lastKey = value[value.length - 1];
       setKeyInfo({
-        key: event.key,
-        location: event.location,
-        code: event.code,
-        which: event.which,
+        key: lastKey,
+        location: 0,
+        code: "",
+        which: lastKey.charCodeAt(0),
       });
       setShowModal(false);
+    }
+  }
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (!showModal) {
+        setKeyInfo({
+          key: event.key,
+          location: event.location,
+          code: event.code,
+          which: event.which,
+        });
+      }
     };
     window.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, []);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [showModal]);
 
   return (
     <div className="min-h-screen flex justify-center items-center bg-transparent">
-      {/* Modal */}
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-black/40 z-50">
           <div className="keylogger-modal" style={{ position: "relative" }}>
             <h2>Press any key</h2>
             <p>Please press a keyboard key to continue.</p>
-            {/* Input for mobile keyboard */}
             <input
               ref={inputRef}
-              style={{
-                opacity: 0.01,
-                position: "absolute",
-                left: "50%",
-                top: "70%",
-                transform: "translate(-50%, -50%)",
-                width: "80%",
-                height: "2.5rem",
-                zIndex: 10,
-                border: "none",
-                background: "transparent",
-              }}
+              className="keylogger-modal-input"
+              value={inputValue}
+              onChange={handleInput}
+              autoFocus
               tabIndex={0}
               aria-hidden="false"
-              autoFocus
+              type="text"
+              inputMode="text"
             />
           </div>
         </div>

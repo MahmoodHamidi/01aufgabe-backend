@@ -59,3 +59,19 @@
     border-radius: 1rem;
   }
 }
+
+/* KeyLogger.css */
+.keylogger-modal-input {
+  opacity: 1;
+  background: #f0f4ff;
+  border-radius: 0.7rem;
+  height: 2.5rem;
+  width: 90%;
+  pointer-events: auto;
+  position: static;
+  margin: 1.5rem auto 0 auto;
+  display: block;
+  border: 1px solid #90caf9;
+  font-size: 1.1rem;
+  text-align: center;
+}
