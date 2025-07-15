@@ -1,0 +1,61 @@
+/* کارت اصلی KeyLogger */
+.max-w-lg {
+  max-width: 600px !important;
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 1.25rem;
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+}
+
+/* استایل مودال */
+.keylogger-modal {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+  padding: 2.5rem 2rem 2rem 2rem;
+  max-width: 340px;
+  width: 90vw;
+  text-align: center;
+  border: 2px solid #90caf9;
+  animation: modalPop 0.3s;
+}
+
+@keyframes modalPop {
+  0% {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* متن مودال */
+.keylogger-modal h2 {
+  font-size: 1.3rem;
+  color: #1976d2;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+.keylogger-modal p {
+  color: #374151;
+  font-size: 1rem;
+}
+
+/* ریسپانسیو موبایل */
+@media (max-width: 700px) {
+  .max-w-lg {
+    max-width: 98vw !important;
+    padding: 0.5rem !important;
+  }
+  .keylogger-modal {
+    max-width: 95vw;
+    padding: 1.2rem 0.5rem 1rem 0.5rem;
+    border-radius: 1rem;
+  }
+}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import "./KeyLogger.css";
 const KeyLogger = () => {
   const [keyInfo, setKeyInfo] = useState({
     key: "",
@@ -7,6 +7,8 @@ const KeyLogger = () => {
     code: "",
     which: "",
   });
+  const [showModal, setShowModal] = useState(true);
+
   useEffect(() => {
     const handleKeyDown = (event) => {
       setKeyInfo({
@@ -15,7 +17,7 @@ const KeyLogger = () => {
         code: event.code,
         which: event.which,
       });
-      console.log(event);
+      setShowModal(false);
     };
     window.addEventListener("keydown", handleKeyDown);
 
@@ -25,38 +27,53 @@ const KeyLogger = () => {
   }, []);
 
   return (
-    <div className="h-screen flex justify-center items-center ">
-      <div className=" text-center w-300 h-100 backdrop-blur bg-white/30 rounded-lg shadow-lg">
-        <p className=" m-6 text-2xl font-mono font-bold">
-          The key you pressed: {keyInfo.key}
-        </p>
-        <h1 className=" m-6 text-amber-500 font-semibold ">{keyInfo.which}</h1>
-        <p className=" m-6 font-semibold text-2xl">Key Code Information</p>
+    <div className="min-h-screen flex justify-center items-center bg-transparent">
+      {/* Modal */}
+      {showModal && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black/40 z-50">
+          <div className="bg-white rounded-xl shadow-xl px-8 py-6 text-center max-w-xs w-full">
+            <h2 className="text-lg font-semibold mb-2">Press any key</h2>
+            <p className="text-gray-600">
+              Please press a keyboard key to continue.
+            </p>
+          </div>
+        </div>
+      )}
 
-        <div className="flex flex-wrap justify-center gap-2">
-          <div className=" w-full sm:w-1/2 lg:w-1/5  rounded-lg shadow-lg text-center bg-white">
+      <div className="w-full max-w-lg mx-auto text-center rounded-2xl shadow-lg bg-white/30 backdrop-blur p-6">
+        <p className="mb-4 text-2xl font-mono font-bold">
+          The key you pressed:{" "}
+          <span className="text-blue-700">{keyInfo.key}</span>
+        </p>
+        <h1 className="mb-4 text-amber-500 font-semibold text-3xl">
+          {keyInfo.which}
+        </h1>
+        <p className="mb-4 font-semibold text-xl">Key Code Information</p>
+
+        <div className="flex flex-wrap justify-center gap-4">
+          <div className="flex-1 min-w-[120px] rounded-lg shadow text-center bg-white/80 mb-2">
             <p className="h-10 flex items-center justify-center bg-blue-600 text-white rounded-t-lg">
               event.key
             </p>
-            <p className="p-2">{keyInfo.key}</p>
+            <p className="p-2 break-words">{keyInfo.key}</p>
           </div>
-          <div className=" w-full sm:w-1/2 lg:w-1/5  rounded-lg shadow-lg text-center bg-white">
+          <div className="flex-1 min-w-[120px] rounded-lg shadow text-center bg-white/80 mb-2">
             <p className="h-10 flex items-center justify-center bg-blue-600 text-white rounded-t-lg">
               event.location
             </p>
-            <p className="p-2">{keyInfo.location}</p>
+            <p className="p-2 break-words">{keyInfo.location}</p>
           </div>
-          <div className=" w-full sm:w-1/2 lg:w-1/5 rounded-lg shadow-lg text-center bg-white">
+          <div className="flex-1 min-w-[120px] rounded-lg shadow text-center bg-white/80 mb-2">
             <p className="h-10 flex items-center justify-center bg-blue-600 text-white rounded-t-lg">
               event.code
             </p>
-            <p className="p-2">{keyInfo.code}</p>
+            <p className="p-2 break-words">{keyInfo.code}</p>
           </div>
-          <div className=" w-full sm:w-1/2 lg:w-1/5  rounded-lg shadow-lg text-center bg-white">
+          <div className="flex-1 min-w-[120px] rounded-lg shadow text-center bg-white/80 mb-2">
             <p className="h-10 flex items-center justify-center bg-blue-600 text-white rounded-t-lg">
               event.which
             </p>
-            <p className="p-2">{keyInfo.which}</p>
+            <p className="p-2 break-words">{keyInfo.which}</p>
           </div>
         </div>
       </div>
