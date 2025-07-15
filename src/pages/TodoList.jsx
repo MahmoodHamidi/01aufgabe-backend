@@ -60,36 +60,44 @@ const TodoList = () => {
   }
 
   return (
-    <div className="to-do-list background">
-      <h1>To-Do List</h1>
-      <div>
-        <input
-          type="text"
-          placeholder="Enter a task..."
-          value={newTask}
-          onChange={handleChange}
-          onKeyDown={handleKeyDown}
-        />
-        <button className="add-button" onClick={addTask}>
-          Add Task
-        </button>
+    <div className="page-center">
+      <div className="to-do-list">
+        <h1>To-Do List</h1>
+        <div className="todo-input-row">
+          <input
+            type="text"
+            placeholder="Enter a task..."
+            value={newTask}
+            onChange={handleChange}
+            onKeyDown={handleKeyDown}
+          />
+          <button className="add-button" onClick={addTask}>
+            Add Task
+          </button>
+        </div>
+        <ol>
+          {tasks.map((task, index) => (
+            <li key={index}>
+              <span className="text">{task}</span>
+              <button
+                className="delete-button"
+                onClick={() => deleteTask(index)}
+              >
+                Delete <MdDeleteForever />
+              </button>
+              <button className="move-button" onClick={() => moveTaskUp(index)}>
+                <FaArrowCircleUp />
+              </button>
+              <button
+                className="move-button"
+                onClick={() => moveTaskDown(index)}
+              >
+                <FaArrowCircleDown />
+              </button>
+            </li>
+          ))}
+        </ol>
       </div>
-      <ol>
-        {tasks.map((task, index) => (
-          <li key={index}>
-            <span className="text">{task}</span>
-            <button className="delete-button" onClick={() => deleteTask(index)}>
-              Delete <MdDeleteForever />
-            </button>
-            <button className="move-button" onClick={() => moveTaskUp(index)}>
-              <FaArrowCircleUp />
-            </button>
-            <button className="move-button" onClick={() => moveTaskDown(index)}>
-              <FaArrowCircleDown />
-            </button>
-          </li>
-        ))}
-      </ol>
     </div>
   );
 };
