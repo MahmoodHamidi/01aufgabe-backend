@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./KeyLogger.css";
+
 const KeyLogger = () => {
   const [keyInfo, setKeyInfo] = useState({
     key: "",
@@ -8,6 +9,13 @@ const KeyLogger = () => {
     which: "",
   });
   const [showModal, setShowModal] = useState(true);
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    if (showModal && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [showModal]);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -31,11 +39,28 @@ const KeyLogger = () => {
       {/* Modal */}
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-black/40 z-50">
-          <div className="bg-white rounded-xl shadow-xl px-8 py-6 text-center max-w-xs w-full">
-            <h2 className="text-lg font-semibold mb-2">Press any key</h2>
-            <p className="text-gray-600">
-              Please press a keyboard key to continue.
-            </p>
+          <div className="keylogger-modal" style={{ position: "relative" }}>
+            <h2>Press any key</h2>
+            <p>Please press a keyboard key to continue.</p>
+            {/* Input for mobile keyboard */}
+            <input
+              ref={inputRef}
+              style={{
+                opacity: 0.01,
+                position: "absolute",
+                left: "50%",
+                top: "70%",
+                transform: "translate(-50%, -50%)",
+                width: "80%",
+                height: "2.5rem",
+                zIndex: 10,
+                border: "none",
+                background: "transparent",
+              }}
+              tabIndex={0}
+              aria-hidden="false"
+              autoFocus
+            />
           </div>
         </div>
       )}
